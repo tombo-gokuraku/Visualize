@@ -1,7 +1,7 @@
 {
-  "name": "gatsby-starter-tailwind-lp",
+  "name": "Visualize",
   "private": true,
-  "description": "Gatsby starter for landing page with Emotion and tailwind. Linting with ESLint and stylelint.",
+  "description": "Visualize test",
   "version": "0.1.0",
   "author": "tombo gokuraku",
   "dependencies": {
@@ -63,7 +63,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
+    "url": "https://github.com/tombo-gokuraku/Visualize"
   },
   "bugs": {
     "url": "https://github.com/gatsbyjs/gatsby/issues"

@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
-    title: `gatsby-starter-tailwind-lp`,
-    description: `Gatsby starter for landing page with Emotion and tailwind. Linting with ESLint and stylelint.`,
+    title: `Visualize`,
+    description: `Visualize test`,
     author: `@tombo-gokuraku`,
   },
   plugins: [
@@ -18,8 +18,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `gatsby-starter-emotion-tailwind`,
-        short_name: `starter`,
+        name: `Visualize test`,
+        short_name: `Visualize`,
         start_url: `/`,
         background_color: `#663399`,
         theme_color: `#663399`,
