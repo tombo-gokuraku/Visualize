@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core"
-import tw from "twin.macro"
+import tw, { css } from "twin.macro"
 import { useStaticQuery, graphql } from "gatsby"
 
 import Layout from "../components/Layout"
@@ -22,162 +22,41 @@ import SocialLinks from "../components/SocialLinks"
 const IndexPage = () => {
   const data = useStaticQuery(graphql`
     query {
-      file(relativePath: { eq: "gatsby-astronaut.png" }) {
+      file(relativePath: { eq: "avatar.jpg" }) {
         childImageSharp {
           fluid(maxWidth: 300) {
-            ...GatsbyImageSharpFluid
+            ...GatsbyImageSharpFluid_withWebp
           }
         }
       }
     }
   `)
   return (
-    <Layout>
-      <Button href={"#!"}>hoge</Button>
-      <Button reverse href={"#!"}>
-        reverse
-      </Button>
-      <SEO title="Home" />
-      <Section>
-        <H1>h1</H1>
-        <H2>h2</H2>
-        <H3>h3</H3>
-        <H4>h4</H4>
-        <H5>h5</H5>
-        <H6>h6</H6>
-        <P>Install the Gatsby CLI and create a project with this starter</P>
-        <Pre>
-          <code>
-            gatsby new emotion_tailwind
-            https://github.com/tombo-gokuraku/gatsby-starter-tailwind-lp
-          </code>
-          <br />
-          <code>cd emotion_tailwind</code>
-          <br />
-          <code>gatsby develop</code>
-        </Pre>
-        <P>
-          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-          nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-          sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
-          rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
-          ipsum dolor sit amet.
-        </P>
-        <P>
-          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-          nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-          sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
-          rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
-          ipsum dolor sit amet.
-        </P>
-        <P>
-          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-          nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-          sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
-          rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
-          ipsum dolor sit amet.
-        </P>
-        <P>
-          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-          nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-          sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
-          rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
-          ipsum dolor sit amet.
-        </P>
-        <P>
-          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-          nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-          sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
-          rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
-          ipsum dolor sit amet.
-        </P>
-      </Section>
-      <Section reverse>
-        <H1>h1</H1>
-        <H2>h2</H2>
-        <H3>h3</H3>
-        <H4>h4</H4>
-        <H5>h5</H5>
-        <H6>h6</H6>
-        <P>Install the Gatsby CLI and create a project with this starter</P>
-        <Pre>
-          <code>
-            gatsby new emotion_tailwind
-            https://github.com/tombo-gokuraku/gatsby-starter-emotion-tailwind
-          </code>
-          <br />
-          <code>cd emotion_tailwind</code>
-          <br />
-          <code>gatsby develop</code>
-        </Pre>
-        <P>
-          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-          nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-          sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
-          rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
-          ipsum dolor sit amet.
-        </P>
-        <P>
-          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-          nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-          sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
-          rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
-          ipsum dolor sit amet.
-        </P>
-        <P>
-          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-          nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-          sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
-          rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
-          ipsum dolor sit amet.
-        </P>
-        <P>
-          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-          nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-          sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
-          rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
-          ipsum dolor sit amet.
-        </P>
-        <P>
-          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-          nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-          sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
-          rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
-          ipsum dolor sit amet.
-        </P>
-        <Card>
-          <div tw="rounded-lg w-full">
-            <Image
-              fluid={data.file.childImageSharp.fluid}
-              wrapperStyle={[tw`rounded-t-lg`]}
-              alt="hoge"
-            />
-          </div>
-          <div tw="p-6">
-            <P>
-              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-              nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-              erat, sed diam voluptua. At vero eos et accusam et justo duo
-              dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
-              sanctus est Lorem ipsum dolor sit amet.
-            </P>
-            <Button reverse href={"#!"}>
-              Learn More
-            </Button>
-          </div>
-        </Card>
-        <Card />
-      </Section>
-      <SocialLinks />
-    </Layout>
+    <div tw="bg-black">
+      <Layout>
+        <SEO title="Home" />
+
+        {/* Avatar component */}
+        <div
+          css={[
+            tw`p-2 mx-auto rounded-full`,
+            css`
+              width: 10rem;
+              background-color: rgba(255, 255, 255, 0.075);
+              border: solid 1px rgba(255, 255, 255, 0.25);
+            `,
+          ]}
+        >
+          <Image
+            fluid={data.file.childImageSharp.fluid}
+            wrapperStyle={[tw`rounded-full`]}
+            alt="avatar"
+          />
+        </div>
+        <SocialLinks />
+      </Layout>
+    </div>
   )
 }
-
-const Pre = tw.pre`
-  text-sm
-  bg-gray-300
-  overflow-auto
-  mb-2
-`
 
 export default IndexPage
