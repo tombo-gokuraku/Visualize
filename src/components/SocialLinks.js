@@ -2,7 +2,8 @@
 import { jsx } from "@emotion/core"
 import "twin.macro"
 
-import { GrTwitter, GrFacebook, GrInstagram } from "react-icons/gr"
+import { GrTwitter, GrFacebook, GrInstagram, GrMail } from "react-icons/gr"
+import { Fa500Px } from "react-icons/fa"
 
 const socialLinkData = [
   {
@@ -20,6 +21,16 @@ const socialLinkData = [
     url: "https://www.instagram.com/",
     ariaLabel: "go to instagram",
   },
+  {
+    icon: <Fa500Px />,
+    url: "https://500px.com/",
+    ariaLabel: "go to 500px",
+  },
+  {
+    icon: <GrMail />,
+    url: "mailto:hogepiyo@example.com",
+    ariaLabel: "mail to hogepiyo@example.com",
+  },
 ]
 
 function SocialLinks() {
@@ -34,7 +45,7 @@ function SocialLinks() {
               rel="noopener noreferrer"
               aria-label={link.ariaLabel}
             >
-              <div tw="p-2 m-2 text-lg text-center text-primary  hover:text-secondary transition-colors duration-200 ease-in-out">
+              <div tw="p-2 m-2 text-lg text-center text-white text-opacity-75 hover:(text-opacity-100 bg-opacity-50) transition-colors duration-200 ease-in-out rounded-full bg-white bg-opacity-25 border border-white border-opacity-75">
                 {link.icon}
               </div>
             </a>
