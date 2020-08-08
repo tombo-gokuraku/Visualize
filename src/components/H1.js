@@ -1,7 +1,7 @@
 import tw, { styled, css } from "twin.macro"
 
 const H1 = styled.h1(() => [
-  tw`text-3xl font-bold xl:text-5xl md:text-4xl`,
+  tw`text-2xl font-thin xl:text-4xl md:text-3xl`,
   css`
     margin-bottom: 0.35em;
   `,
