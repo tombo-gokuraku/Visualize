@@ -20,6 +20,7 @@ import Card from "../components/Card"
 import Image from "../components/Image"
 import SocialLinks from "../components/SocialLinks"
 import BackgroundImage from "../components/BackgroundImage"
+import MasonryContainer from "../components/MasonryContainer"
 
 const IndexPage = () => {
   const data = useStaticQuery(graphql`
@@ -88,7 +89,7 @@ const IndexPage = () => {
           <SocialLinks />
         </Header>
         <Layout>
-          <div tw="flex flex-no-wrap md:flex-wrap justify-around content-start">
+          <MasonryContainer>
             {data.allFile.images.map(image => {
               return (
                 <Card key={image.id}>
@@ -102,9 +103,9 @@ const IndexPage = () => {
                 </Card>
               )
             })}
-          </div>
+          </MasonryContainer>
         </Layout>
-      </BackgroundImage>{" "}
+      </BackgroundImage>
     </div>
   )
 }
