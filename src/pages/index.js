@@ -47,6 +47,7 @@ const IndexPage = () => {
             fluid {
               ...GatsbyImageSharpFluid_withWebp
             }
+            id
           }
         }
       }
@@ -87,32 +88,20 @@ const IndexPage = () => {
           <SocialLinks />
         </Header>
         <Layout>
-          <div tw="flex flex-wrap md:flex-no-wrap">
-            <Card>
-              <div tw="w-full rounded-t-lg">
-                <Image
-                  fluid={data.allFile.images[0].childImageSharp.fluid}
-                  wrapperStyle={[tw`rounded-t-lg`]}
-                />
-              </div>
-              <H2 />
-            </Card>
-            <Card>
-              <div tw="w-full rounded-t-lg">
-                <Image
-                  fluid={data.allFile.images[0].childImageSharp.fluid}
-                  wrapperStyle={[tw`rounded-t-lg`]}
-                />
-              </div>
-            </Card>
-            <Card>
-              <div tw="w-full rounded-t-lg">
-                <Image
-                  fluid={data.allFile.images[0].childImageSharp.fluid}
-                  wrapperStyle={[tw`rounded-t-lg`]}
-                />
-              </div>
-            </Card>
+          <div tw="flex flex-no-wrap md:flex-wrap justify-around content-start">
+            {data.allFile.images.map(image => {
+              return (
+                <Card key={image.id}>
+                  <div tw="w-full rounded-t-lg">
+                    <Image
+                      fluid={image.childImageSharp.fluid}
+                      wrapperStyle={[tw`rounded-t-lg`]}
+                    />
+                  </div>
+                  <H2>Lorem ipsum dolor sit amet</H2>
+                </Card>
+              )
+            })}
           </div>
         </Layout>
       </BackgroundImage>{" "}
