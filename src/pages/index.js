@@ -6,6 +6,7 @@ import { useStaticQuery, graphql } from "gatsby"
 import Layout from "../components/Layout"
 import SEO from "../components/SEO"
 
+import Header from "../components/Header"
 import Section from "../components/Section"
 import Button from "../components/Button"
 import H1 from "../components/H1"
@@ -18,43 +19,103 @@ import P from "../components/P"
 import Card from "../components/Card"
 import Image from "../components/Image"
 import SocialLinks from "../components/SocialLinks"
+import BackgroundImage from "../components/BackgroundImage"
 
 const IndexPage = () => {
   const data = useStaticQuery(graphql`
     query {
-      file(relativePath: { eq: "avatar.jpg" }) {
+      avatar: file(relativePath: { eq: "avatar.jpg" }) {
         childImageSharp {
           fluid(maxWidth: 300) {
             ...GatsbyImageSharpFluid_withWebp
           }
         }
       }
+      bg: file(relativePath: { eq: "bg.jpg" }) {
+        childImageSharp {
+          fluid(maxWidth: 600) {
+            ...GatsbyImageSharpFluid_withWebp
+          }
+        }
+      }
+      allFile(
+        filter: { relativePath: { glob: "0*.jpg" } }
+        sort: { order: ASC, fields: relativePath }
+      ) {
+        images: nodes {
+          childImageSharp {
+            fluid {
+              ...GatsbyImageSharpFluid_withWebp
+            }
+          }
+        }
+      }
     }
   `)
   return (
-    <div tw="bg-black">
-      <Layout>
+    <div tw="text-white text-opacity-75">
+      <BackgroundImage
+        fluid={data.bg.childImageSharp.fluid}
+        parentStyle={{
+          position: "relative",
+        }}
+      >
         <SEO title="Home" />
-
-        {/* Avatar component */}
-        <div
-          css={[
-            tw`p-2 mx-auto rounded-full`,
-            css`
-              width: 10rem;
-              background-color: rgba(255, 255, 255, 0.075);
-              border: solid 1px rgba(255, 255, 255, 0.25);
-            `,
-          ]}
-        >
-          <Image
-            fluid={data.file.childImageSharp.fluid}
-            wrapperStyle={[tw`rounded-full`]}
-            alt="avatar"
-          />
-        </div>
-        <SocialLinks />
-      </Layout>
+        <Header>
+          {/* Avatar component */}
+          <div
+            css={[
+              tw`p-2 mx-auto rounded-full`,
+              css`
+                width: 10rem;
+                background-color: rgba(255, 255, 255, 0.075);
+                border: solid 1px rgba(255, 255, 255, 0.25);
+              `,
+            ]}
+          >
+            <Image
+              fluid={data.avatar.childImageSharp.fluid}
+              wrapperStyle={[tw`rounded-full`]}
+              alt="avatar"
+            />
+          </div>
+          <H1>
+            This is <strong tw="text-opacity-100 font-normal">Visualize</strong>
+            , a responsive site template designed by TEMPLATED <br />
+            and released for free under the Creative Commons License.
+          </H1>
+          <SocialLinks />
+        </Header>
+        <Layout>
+          <div tw="flex flex-wrap md:flex-no-wrap">
+            <Card>
+              <div tw="w-full rounded-t-lg">
+                <Image
+                  fluid={data.allFile.images[0].childImageSharp.fluid}
+                  wrapperStyle={[tw`rounded-t-lg`]}
+                />
+              </div>
+              <H2 />
+            </Card>
+            <Card>
+              <div tw="w-full rounded-t-lg">
+                <Image
+                  fluid={data.allFile.images[0].childImageSharp.fluid}
+                  wrapperStyle={[tw`rounded-t-lg`]}
+                />
+              </div>
+            </Card>
+            <Card>
+              <div tw="w-full rounded-t-lg">
+                <Image
+                  fluid={data.allFile.images[0].childImageSharp.fluid}
+                  wrapperStyle={[tw`rounded-t-lg`]}
+                />
+              </div>
+            </Card>
+          </div>
+        </Layout>
+      </BackgroundImage>{" "}
     </div>
   )
 }
