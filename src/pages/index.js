@@ -21,6 +21,7 @@ import Image from "../components/Image"
 import SocialLinks from "../components/SocialLinks"
 import BackgroundImage from "../components/BackgroundImage"
 import MasonryContainer from "../components/MasonryContainer"
+import ScreenContainer from "../components/ScreenContainer"
 
 const IndexPage = () => {
   const data = useStaticQuery(graphql`
@@ -63,48 +64,51 @@ const IndexPage = () => {
         }}
       >
         <SEO title="Home" />
-        <Header>
-          {/* Avatar component */}
-          <div
-            css={[
-              tw`p-2 mx-auto rounded-full`,
-              css`
-                width: 10rem;
-                background-color: rgba(255, 255, 255, 0.075);
-                border: solid 1px rgba(255, 255, 255, 0.25);
-              `,
-            ]}
-          >
-            <Image
-              fluid={data.avatar.childImageSharp.fluid}
-              wrapperStyle={[tw`rounded-full`]}
-              alt="avatar"
-            />
-          </div>
-          <H1>
-            This is <strong tw="text-opacity-100 font-normal">Visualize</strong>
-            , a responsive site template designed by TEMPLATED <br />
-            and released for free under the Creative Commons License.
-          </H1>
-          <SocialLinks />
-        </Header>
-        <Layout>
-          <MasonryContainer>
-            {data.allFile.images.map(image => {
-              return (
-                <Card key={image.id}>
-                  <div tw="w-full rounded-t-lg">
-                    <Image
-                      fluid={image.childImageSharp.fluid}
-                      wrapperStyle={[tw`rounded-t-lg`]}
-                    />
-                  </div>
-                  <H2>Lorem ipsum dolor sit amet</H2>
-                </Card>
-              )
-            })}
-          </MasonryContainer>
-        </Layout>
+        <ScreenContainer>
+          <Header>
+            {/* Avatar component */}
+            <div
+              css={[
+                tw`p-2 mx-auto rounded-full`,
+                css`
+                  width: 10rem;
+                  background-color: rgba(255, 255, 255, 0.075);
+                  border: solid 1px rgba(255, 255, 255, 0.25);
+                `,
+              ]}
+            >
+              <Image
+                fluid={data.avatar.childImageSharp.fluid}
+                wrapperStyle={[tw`rounded-full`]}
+                alt="avatar"
+              />
+            </div>
+            <H1>
+              This is{" "}
+              <strong tw="text-opacity-100 font-normal">Visualize</strong>
+              , a responsive site template designed by TEMPLATED <br />
+              and released for free under the Creative Commons License.
+            </H1>
+            <SocialLinks />
+          </Header>
+          <Layout>
+            <MasonryContainer>
+              {data.allFile.images.map(image => {
+                return (
+                  <Card key={image.id}>
+                    <div tw="w-full rounded-t-lg">
+                      <Image
+                        fluid={image.childImageSharp.fluid}
+                        wrapperStyle={[tw`rounded-t-lg`]}
+                      />
+                    </div>
+                    <H2>Lorem ipsum dolor sit amet</H2>
+                  </Card>
+                )
+              })}
+            </MasonryContainer>
+          </Layout>
+        </ScreenContainer>
       </BackgroundImage>
     </div>
   )
