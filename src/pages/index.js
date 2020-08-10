@@ -22,6 +22,7 @@ import SocialLinks from "../components/SocialLinks"
 import BackgroundImage from "../components/BackgroundImage"
 import MasonryContainer from "../components/MasonryContainer"
 import ScreenContainer from "../components/ScreenContainer"
+import OuterLink from "../components/OuterLink"
 
 const IndexPage = () => {
   const data = useStaticQuery(graphql`
@@ -85,8 +86,16 @@ const IndexPage = () => {
             </div>
             <H1>
               This is{" "}
-              <strong tw="text-opacity-100 font-normal">Visualize</strong>
-              , a responsive site template designed by TEMPLATED <br />
+              <strong tw="text-opacity-100 font-normal">Visualize</strong>, a
+              responsive site template designed by{" "}
+              <OuterLink
+                href="https://templated.co/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                TEMPLATED
+              </OuterLink>{" "}
+              <br />
               and released for free under the Creative Commons License.
             </H1>
             <SocialLinks />
