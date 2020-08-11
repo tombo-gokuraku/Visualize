@@ -16,6 +16,7 @@ import BackgroundImage from "../components/BackgroundImage"
 import MasonryContainer from "../components/MasonryContainer"
 import ScreenContainer from "../components/ScreenContainer"
 import OuterLink from "../components/OuterLink"
+import ImageModal from "../components/ImageModal"
 
 const IndexPage = () => {
   const data = useStaticQuery(graphql`
@@ -109,6 +110,7 @@ const IndexPage = () => {
                 )
               })}
             </MasonryContainer>
+            <ImageModal />
           </Layout>
         </ScreenContainer>
       </BackgroundImage>
