@@ -26,9 +26,7 @@ function Footer() {
         >
           TEMPLATED
         </OuterLink>
-        .
-        <br />
-        500px icon:{" "}
+        . 500px icon:{" "}
         <OuterLink
           href="https://fontawesome.com/icons/500px"
           target="_blank"
@@ -36,9 +34,7 @@ function Footer() {
         >
           FontAwesome
         </OuterLink>
-        .
-        <br />
-        Demo Images:{" "}
+        . Demo Images:{" "}
         <OuterLink
           href="https://unsplash.com/"
           target="_blank"
