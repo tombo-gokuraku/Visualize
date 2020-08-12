@@ -12,6 +12,7 @@ function ImageModal() {
           onClick={() => setShowModal(false)}
           onKeyDown={() => setShowModal(false)}
           role="button"
+          tabIndex={0}
         >
           Modal
         </div>
