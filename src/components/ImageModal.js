@@ -1,20 +1,46 @@
-import React, { useState } from "react"
-import "twin.macro"
+/** @jsx jsx */
+import { jsx } from "@emotion/core"
+import { useState } from "react"
+import tw, { css } from "twin.macro"
+import Image from "gatsby-image"
+
+import { useStaticQuery, graphql } from "gatsby"
+const query = graphql`
+  {
+    file(relativePath: { eq: "01.jpg" }) {
+      childImageSharp {
+        fluid(maxWidth: 600) {
+          ...GatsbyImageSharpFluid_withWebp
+        }
+      }
+    }
+  }
+`
 
 function ImageModal() {
+  const data = useStaticQuery(query)
   const [showModal, setShowModal] = useState(false)
   return (
     <div>
       <button onClick={() => setShowModal(true)}>open modal</button>
       {showModal ? (
+        // Modal
         <div
-          tw="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
+          tw="justify-center items-center flex overflow-hidden fixed inset-0 z-50 outline-none focus:outline-none h-screen w-screen"
           onClick={() => setShowModal(false)}
           onKeyDown={() => setShowModal(false)}
           role="button"
           tabIndex={0}
         >
-          Modal
+          <div
+            css={[tw`relative w-full h-screen py-16 mx-auto my-0 rounded-lg`]}
+          >
+            <Image
+              fluid={data.file.childImageSharp.fluid}
+              css={[tw`h-full rounded-lg`]}
+              imgStyle={{ objectFit: "contain" }}
+            />
+          </div>
         </div>
       ) : null}
     </div>
