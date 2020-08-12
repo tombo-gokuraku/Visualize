@@ -3,6 +3,7 @@ import { jsx } from "@emotion/core"
 import { useState } from "react"
 import tw, { css } from "twin.macro"
 import Image from "gatsby-image"
+import { MdClose } from "react-icons/md"
 
 import { useStaticQuery, graphql } from "gatsby"
 const query = graphql`
@@ -40,6 +41,18 @@ function ImageModal() {
               css={[tw`h-full rounded-lg`]}
               imgStyle={{ objectFit: "contain" }}
             />
+            <button
+              css={[
+                tw`absolute text-4xl border-2 rounded-full`,
+                css`
+                  top: 1rem;
+                  right: 1rem;
+                `,
+              ]}
+              onClick={() => setShowModal(false)}
+            >
+              <MdClose />
+            </button>
           </div>
         </div>
       ) : null}
