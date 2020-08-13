@@ -5,12 +5,12 @@ import { useStaticQuery, graphql } from "gatsby"
 
 import Layout from "../components/Layout"
 import SEO from "../components/SEO"
+import Img from "gatsby-image"
 
 import Header from "../components/Header"
 import H1 from "../components/H1"
 import H2 from "../components/H2"
 import Card from "../components/Card"
-import Image from "../components/Image"
 import SocialLinks from "../components/SocialLinks"
 import BackgroundImage from "../components/BackgroundImage"
 import MasonryContainer from "../components/MasonryContainer"
@@ -72,9 +72,9 @@ const IndexPage = () => {
                 `,
               ]}
             >
-              <Image
+              <Img
                 fluid={data.avatar.childImageSharp.fluid}
-                wrapperStyle={[tw`rounded-full`]}
+                style={{ borderRadius: "9999px" }}
                 alt="avatar"
               />
             </div>
@@ -100,9 +100,12 @@ const IndexPage = () => {
                 return (
                   <Card key={image.id}>
                     <div tw="w-full rounded-t-lg">
-                      <Image
+                      <Img
                         fluid={image.childImageSharp.fluid}
-                        wrapperStyle={[tw`rounded-t-lg`]}
+                        style={{
+                          borderTopRightRadius: "0.5rem",
+                          borderTopLeftRadius: "0.5rem",
+                        }}
                       />
                     </div>
                     <H2>Lorem ipsum dolor sit amet</H2>
