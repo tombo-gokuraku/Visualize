@@ -33,27 +33,39 @@ function ImageModal() {
           role="button"
           tabIndex={0}
         >
-          <div
-            css={[tw`relative w-full h-screen py-16 mx-auto my-0 rounded-lg`]}
-          >
+          <div css={[tw`w-full h-screen py-16 mx-auto my-0 rounded-lg`]}>
             <Image
               fluid={data.file.childImageSharp.fluid}
-              css={[tw`h-full rounded-lg`]}
-              imgStyle={{ objectFit: "contain" }}
-            />
-            <button
               css={[
-                tw`absolute text-4xl border-2 rounded-full`,
+                tw`inline-block rounded-lg`,
                 css`
-                  top: 1rem;
-                  right: 1rem;
+                  &::after {
+                    content: "x";
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                  }
                 `,
               ]}
-              onClick={() => setShowModal(false)}
-            >
-              <MdClose />
-            </button>
+              imgStyle={{
+                objectFit: "contain",
+                width: "auto",
+                height: "100%",
+              }}
+            />
           </div>
+          <button
+            css={[
+              tw`absolute text-4xl border-2 rounded-full`,
+              css`
+                top: 1rem;
+                right: 1rem;
+              `,
+            ]}
+            onClick={() => setShowModal(false)}
+          >
+            <MdClose />
+          </button>
         </div>
       ) : null}
     </div>
