@@ -4,6 +4,7 @@ import { useState } from "react"
 import tw, { css } from "twin.macro"
 import Image from "gatsby-image"
 import { MdClose } from "react-icons/md"
+import Modal from "react-modal"
 
 import { useStaticQuery, graphql } from "gatsby"
 const query = graphql`
@@ -18,56 +19,65 @@ const query = graphql`
   }
 `
 
+Modal.setAppElement("#___gatsby")
+
+const modalStyles = {
+  overlay: {
+    backgroundColor: "rgba(0, 0, 0, 0.58)",
+  },
+  content: {
+    position: "relative",
+    top: "auto",
+    left: "auto",
+    right: "auto",
+    bottom: "auto",
+    maxWidth: "100%",
+    maxHeight: "100%",
+    margin: "0 auto",
+    padding: 0,
+    border: 0,
+  },
+}
+
 function ImageModal() {
   const data = useStaticQuery(query)
   const [showModal, setShowModal] = useState(false)
   return (
     <div>
       <button onClick={() => setShowModal(true)}>open modal</button>
-      {showModal ? (
-        // Modal
-        <div
-          tw="justify-center items-center flex overflow-hidden fixed inset-0 z-50 outline-none focus:outline-none h-screen w-screen"
-          onClick={() => setShowModal(false)}
-          onKeyDown={() => setShowModal(false)}
-          role="button"
-          tabIndex={0}
-        >
-          <div css={[tw`w-full h-screen py-16 mx-auto my-0 rounded-lg`]}>
-            <Image
-              fluid={data.file.childImageSharp.fluid}
-              css={[
-                tw`inline-block rounded-lg`,
-                css`
-                  &::after {
-                    content: "x";
-                    position: absolute;
-                    top: 0;
-                    right: 0;
-                  }
-                `,
-              ]}
-              imgStyle={{
-                objectFit: "contain",
-                width: "auto",
-                height: "100%",
-              }}
-            />
-          </div>
-          <button
-            css={[
-              tw`absolute text-4xl border-2 rounded-full`,
-              css`
-                top: 1rem;
-                right: 1rem;
-              `,
-            ]}
-            onClick={() => setShowModal(false)}
-          >
-            <MdClose />
-          </button>
-        </div>
-      ) : null}
+      <Modal
+        isOpen={showModal}
+        onRequestClose={() => setShowModal(false)}
+        style={modalStyles}
+      >
+        <Image
+          fluid={data.file.childImageSharp.fluid}
+          style={
+            {
+              //overflow: "hidden",
+              //height: "100%",
+              //maxHeight: "100%",
+              //display: "inline-block",
+            }
+          }
+          //css={[
+          //  tw`inline-block rounded-lg`,
+          //  css`
+          //    &::after {
+          //      content: "x";
+          //      position: absolute;
+          //      top: 0;
+          //      right: 0;
+          //    }
+          //  `,
+          //]}
+          imgStyle={{
+            objectFit: "contain",
+            width: "auto",
+            height: "100%",
+          }}
+        />
+      </Modal>
     </div>
   )
 }
