@@ -24,6 +24,7 @@
     "react-dom": "^16.13.1",
     "react-helmet": "^6.1.0",
     "react-icons": "^3.10.0",
+    "react-modal": "^3.11.2",
     "twin.macro": "^1.6.1"
   },
   "devDependencies": {
