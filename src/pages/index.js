@@ -8,7 +8,6 @@ import SEO from "../components/SEO"
 
 import Header from "../components/Header"
 import H1 from "../components/H1"
-import H2 from "../components/H2"
 import Card from "../components/Card"
 import Image from "../components/Image"
 import SocialLinks from "../components/SocialLinks"
@@ -98,15 +97,11 @@ const IndexPage = () => {
             <MasonryContainer>
               {data.allFile.images.map(image => {
                 return (
-                  <Card key={image.id}>
-                    <div tw="w-full rounded-t-lg">
-                      <Image
-                        fluid={image.childImageSharp.fluid}
-                        wrapperStyle={[tw`rounded-t-lg`]}
-                      />
-                    </div>
-                    <H2>Lorem ipsum dolor sit amet</H2>
-                  </Card>
+                  <Card
+                    key={image.id}
+                    image={image.childImageSharp.fluid}
+                    title={"Lorem ipsum dolor sit amet"}
+                  />
                 )
               })}
             </MasonryContainer>
