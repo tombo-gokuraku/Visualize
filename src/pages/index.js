@@ -9,7 +9,6 @@ import Img from "gatsby-image"
 
 import Header from "../components/Header"
 import H1 from "../components/H1"
-import H2 from "../components/H2"
 import Card from "../components/Card"
 import SocialLinks from "../components/SocialLinks"
 import BackgroundImage from "../components/BackgroundImage"
@@ -98,18 +97,11 @@ const IndexPage = () => {
             <MasonryContainer>
               {data.allFile.images.map(image => {
                 return (
-                  <Card key={image.id}>
-                    <div tw="w-full rounded-t-lg">
-                      <Img
-                        fluid={image.childImageSharp.fluid}
-                        style={{
-                          borderTopRightRadius: "0.5rem",
-                          borderTopLeftRadius: "0.5rem",
-                        }}
-                      />
-                    </div>
-                    <H2>Lorem ipsum dolor sit amet</H2>
-                  </Card>
+                  <Card
+                    key={image.id}
+                    image={image.childImageSharp.fluid}
+                    title={"Lorem ipsum dolor sit amet"}
+                  />
                 )
               })}
             </MasonryContainer>

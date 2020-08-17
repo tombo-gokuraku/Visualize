@@ -45,39 +45,41 @@ function ImageModal() {
   return (
     <div>
       <button onClick={() => setShowModal(true)}>open modal</button>
-      <Modal
-        isOpen={showModal}
-        onRequestClose={() => setShowModal(false)}
-        style={modalStyles}
-      >
-        <Image
-          fluid={data.file.childImageSharp.fluid}
-          style={
-            {
-              //overflow: "hidden",
-              //height: "100%",
-              //maxHeight: "100%",
-              //display: "inline-block",
-            }
-          }
-          //css={[
-          //  tw`inline-block rounded-lg`,
-          //  css`
-          //    &::after {
-          //      content: "x";
-          //      position: absolute;
-          //      top: 0;
-          //      right: 0;
-          //    }
-          //  `,
-          //]}
-          imgStyle={{
-            objectFit: "contain",
-            width: "auto",
-            height: "100%",
-          }}
-        />
-      </Modal>
+      {showModal ? (
+        // Modal
+        <div
+          css={[
+            tw`fixed inset-0 z-50 flex items-center justify-center w-screen h-screen overflow-hidden outline-none focus:outline-none`,
+            css`
+              background-color: rgba(0, 0, 0, 0.75);
+            `,
+          ]}
+          onClick={() => setShowModal(false)}
+          onKeyDown={() => setShowModal(false)}
+          role="button"
+          tabIndex={0}
+        >
+          <button
+            css={[
+              tw`absolute z-10 text-4xl border-2 rounded-full`,
+              css`
+                top: 1rem;
+                right: 1rem;
+              `,
+            ]}
+            onClick={() => setShowModal(false)}
+          >
+            <MdClose />
+          </button>
+          <div css={[tw`relative w-full h-screen p-4 mx-auto my-0 rounded-lg`]}>
+            <Image
+              fluid={data.file.childImageSharp.fluid}
+              css={[tw`h-full rounded-lg`]}
+              imgStyle={{ objectFit: "contain" }}
+            />
+          </div>
+        </div>
+      ) : null}
     </div>
   )
 }
