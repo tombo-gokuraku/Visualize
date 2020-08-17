@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core"
+// import { ClassNames } from "@emotion/core"
 import { useState } from "react"
 import PropTypes from "prop-types"
 import tw, { css } from "twin.macro"
@@ -62,10 +63,42 @@ function Card({ children, image, title }) {
         />
       </div>
       <H2>{title}</H2>
+      {/* <ClassNames> */}
       <Modal
         isOpen={showModal}
         onRequestClose={() => setShowModal(false)}
         style={modalStyles}
+        closeTimeoutMS={500}
+        //className={css`
+        //  .ReactModal__Overlay {
+        //    background-color: rgba(0, 0, 0, 0);
+        //    transition: background 500ms ease-in-out;
+        //  }
+
+        //  .ReactModal__Overlay--after-open {
+        //    background-color: rgba(0, 0, 0, 0.8);
+        //  }
+
+        //  .ReactModal__Overlay--before-close {
+        //    background-color: rgba(0, 0, 0, 0);
+        //  }
+        //`}
+        //css={[
+        //  css`
+        //    .ReactModal__Overlay {
+        //      background-color: rgba(0, 0, 0, 0);
+        //      transition: background 500ms ease-in-out;
+        //    }
+
+        //    .ReactModal__Overlay--after-open {
+        //      background-color: rgba(0, 0, 0, 0.8);
+        //    }
+
+        //    .ReactModal__Overlay--before-close {
+        //      background-color: rgba(0, 0, 0, 0);
+        //    }
+        //  `,
+        //]}
       >
         <button
           css={[
@@ -85,6 +118,7 @@ function Card({ children, image, title }) {
           imgStyle={{ objectFit: "contain", width: "100%", height: "100%" }}
         />
       </Modal>
+      {/* </ClassNames> */}
     </div>
   )
 }
