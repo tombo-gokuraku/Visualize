@@ -27,32 +27,35 @@ function ImageModal() {
       {showModal ? (
         // Modal
         <div
-          tw="justify-center items-center flex overflow-hidden fixed inset-0 z-50 outline-none focus:outline-none h-screen w-screen"
+          css={[
+            tw`fixed inset-0 z-50 flex items-center justify-center w-screen h-screen overflow-hidden outline-none focus:outline-none`,
+            css`
+              background-color: rgba(0, 0, 0, 0.75);
+            `,
+          ]}
           onClick={() => setShowModal(false)}
           onKeyDown={() => setShowModal(false)}
           role="button"
           tabIndex={0}
         >
-          <div
-            css={[tw`relative w-full h-screen py-16 mx-auto my-0 rounded-lg`]}
+          <button
+            css={[
+              tw`absolute z-10 text-4xl border-2 rounded-full`,
+              css`
+                top: 1rem;
+                right: 1rem;
+              `,
+            ]}
+            onClick={() => setShowModal(false)}
           >
+            <MdClose />
+          </button>
+          <div css={[tw`relative w-full h-screen p-4 mx-auto my-0 rounded-lg`]}>
             <Image
               fluid={data.file.childImageSharp.fluid}
               css={[tw`h-full rounded-lg`]}
               imgStyle={{ objectFit: "contain" }}
             />
-            <button
-              css={[
-                tw`absolute text-4xl border-2 rounded-full`,
-                css`
-                  top: 1rem;
-                  right: 1rem;
-                `,
-              ]}
-              onClick={() => setShowModal(false)}
-            >
-              <MdClose />
-            </button>
           </div>
         </div>
       ) : null}
