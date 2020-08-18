@@ -35,6 +35,18 @@ const modalStyles = {
   },
 }
 
+const overlayAnimationStyles = {
+  base: {
+    backgroundColor: "rgba(0, 0, 0, 0)",
+    transition: "background 500ms ease-in-out",
+  },
+  afterOpen: {
+    backgroundColor: "rgba(0, 0, 0, 0.8)",
+  },
+  beforeClose: {
+    backgroundColor: "rgba(0, 0, 0, 0)",
+  },
+}
 function Card({ children, image, title }) {
   const [showModal, setShowModal] = useState(false)
   return (
@@ -69,36 +81,23 @@ function Card({ children, image, title }) {
         onRequestClose={() => setShowModal(false)}
         style={modalStyles}
         closeTimeoutMS={500}
-        //className={css`
-        //  .ReactModal__Overlay {
-        //    background-color: rgba(0, 0, 0, 0);
-        //    transition: background 500ms ease-in-out;
-        //  }
+        overlayClassName={overlayAnimationStyles}
+        css={[
+          css`
+            .ReactModal__Overlay {
+              background-color: rgba(0, 0, 0, 0);
+              transition: background 500ms ease-in-out;
+            }
 
-        //  .ReactModal__Overlay--after-open {
-        //    background-color: rgba(0, 0, 0, 0.8);
-        //  }
+            .ReactModal__Overlay--after-open {
+              background-color: rgba(0, 0, 0, 0.8);
+            }
 
-        //  .ReactModal__Overlay--before-close {
-        //    background-color: rgba(0, 0, 0, 0);
-        //  }
-        //`}
-        //css={[
-        //  css`
-        //    .ReactModal__Overlay {
-        //      background-color: rgba(0, 0, 0, 0);
-        //      transition: background 500ms ease-in-out;
-        //    }
-
-        //    .ReactModal__Overlay--after-open {
-        //      background-color: rgba(0, 0, 0, 0.8);
-        //    }
-
-        //    .ReactModal__Overlay--before-close {
-        //      background-color: rgba(0, 0, 0, 0);
-        //    }
-        //  `,
-        //]}
+            .ReactModal__Overlay--before-close {
+              background-color: rgba(0, 0, 0, 0);
+            }
+          `,
+        ]}
       >
         <button
           css={[
