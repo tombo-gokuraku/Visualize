@@ -1,4 +1,5 @@
 module.exports = {
+  pathPrefix: "/Visualize",
   siteMetadata: {
     title: `Visualize`,
     description: `Visualize test`,
