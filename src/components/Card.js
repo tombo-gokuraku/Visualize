@@ -49,6 +49,10 @@ function Card({ children, image, title }) {
       <Global
         styles={css`
           .overlay-base {
+            max-width: 100%;
+            max-height: 100vh;
+            height: 100vh;
+            padding: 1rem;
             position: fixed;
             top: 0;
             bottom: 0;
@@ -68,24 +72,21 @@ function Card({ children, image, title }) {
             background-color: rgba(0, 0, 0, 0);
             opacity: 0;
           }
-          .ReactModal__Content {
-            position: "relative";
-            top: "auto";
-            left: "auto";
-            right: "auto";
-            bottom: "auto";
-            max-width: "100%";
-            max-height: "100vh";
-            height: "100vh";
-            margin: "0 auto";
-            padding: "1rem";
+          .content-base {
+            position: relative;
+            top: auto;
+            left: auto;
+            right: auto;
+            bottom: auto;
+            margin: 0 auto;
             border: 0;
-            background-color: "transparent";
-            display: "flex";
-            justify-content: "center";
-            align-items: "center";
+            background-color: transparent;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            width: auto;
           }
-          /* .ReactModal__Content--after-open */
         `}
       />
 
@@ -101,6 +102,11 @@ function Card({ children, image, title }) {
           base: "overlay-base",
           afterOpen: "overlay-after",
           beforeClose: "overlay-before",
+        }}
+        className={{
+          base: "content-base",
+          afterOpen: "content-after",
+          beforeClose: "content-before",
         }}
       >
         <button
