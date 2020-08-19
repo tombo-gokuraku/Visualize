@@ -40,6 +40,11 @@ function Card({ children, image, title }) {
         css`
           box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.25);
           background-color: rgba(255, 255, 255, 0.075);
+          &:hover {
+            background-color: rgba(255, 255, 255, 0.25);
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.25),
+              0 0 0.5em 0 #ff6382;
+          }
         `,
       ]}
       onClick={() => setShowModal(true)}
