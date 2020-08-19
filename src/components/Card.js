@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx, Global } from "@emotion/core"
-import { useState } from "react"
+import { useState, useCallback } from "react"
 import PropTypes from "prop-types"
 import tw, { css } from "twin.macro"
 import Modal from "react-modal"
@@ -13,7 +13,16 @@ Modal.setAppElement("#___gatsby")
 
 function Card({ children, image, title }) {
   const [showModal, setShowModal] = useState(false)
-  console.log(image)
+  const [modalContentHeight, setModalContentHeight] = useState(0)
+
+  const measuredRef = useCallback(node => {
+    console.log(node)
+    if (node !== null) {
+      setModalContentHeight(node.base.parentNode.getBoundingClientRect().height)
+      console.log(node.base.parentNode.getBoundingClientRect().height)
+    }
+  }, [])
+
   return (
     <div
       css={[
@@ -37,7 +46,7 @@ function Card({ children, image, title }) {
     >
       <div tw="w-full rounded-t-lg">
         <Image
-          fluid={image.childImageSharp.fluid}
+          fluid={image}
           style={{
             borderTopRightRadius: "0.5rem",
             borderTopLeftRadius: "0.5rem",
@@ -123,13 +132,14 @@ function Card({ children, image, title }) {
           <MdClose />
         </button>
         <Image
+          ref={measuredRef}
           fluid={image}
           style={{
             display: "inline-block",
-            aspectRatio: image.aspectRatio,
-            //maxWidth: image.childImageSharp.sizes.presentationWidth,
+            // width: calc(content element height * aspectRatio)
+            width: `calc(${modalContentHeight}px * ${image.aspectRatio})`,
+            height: "100%",
           }}
-          sizes={image.childImageSharp.sizes}
           imgStyle={{ objectFit: "contain", width: "auto", height: "100%" }}
         />
       </Modal>

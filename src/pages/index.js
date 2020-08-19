@@ -41,6 +41,7 @@ const IndexPage = () => {
           childImageSharp {
             fluid(maxWidth: 300) {
               ...GatsbyImageSharpFluid_withWebp
+              aspectRatio
             }
             id
           }
