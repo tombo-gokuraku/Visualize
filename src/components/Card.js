@@ -93,7 +93,11 @@ function Card({ children, image, title }) {
 
       <Modal
         isOpen={showModal}
-        onRequestClose={() => setShowModal(false)}
+        onRequestClose={e => {
+          e.stopPropagation()
+          setShowModal(false)
+        }}
+        shouldCloseOnOverlayClick={true}
         style={modalStyles}
         closeTimeoutMS={200}
         overlayClassName={{
