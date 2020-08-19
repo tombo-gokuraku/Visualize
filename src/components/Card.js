@@ -11,26 +11,6 @@ import H2 from "../components/H2"
 
 Modal.setAppElement("#___gatsby")
 
-const modalStyles = {
-  content: {
-    position: "relative",
-    top: "auto",
-    left: "auto",
-    right: "auto",
-    bottom: "auto",
-    maxWidth: "100%",
-    maxHeight: "100vh",
-    height: "100vh",
-    margin: "0 auto",
-    padding: "1rem",
-    border: 0,
-    backgroundColor: "transparent",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-}
-
 function Card({ children, image, title }) {
   const [showModal, setShowModal] = useState(false)
   return (
@@ -88,6 +68,24 @@ function Card({ children, image, title }) {
             background-color: rgba(0, 0, 0, 0);
             opacity: 0;
           }
+          .ReactModal__Content {
+            position: "relative";
+            top: "auto";
+            left: "auto";
+            right: "auto";
+            bottom: "auto";
+            max-width: "100%";
+            max-height: "100vh";
+            height: "100vh";
+            margin: "0 auto";
+            padding: "1rem";
+            border: 0;
+            background-color: "transparent";
+            display: "flex";
+            justify-content: "center";
+            align-items: "center";
+          }
+          /* .ReactModal__Content--after-open */
         `}
       />
 
@@ -98,7 +96,6 @@ function Card({ children, image, title }) {
           setShowModal(false)
         }}
         shouldCloseOnOverlayClick={true}
-        style={modalStyles}
         closeTimeoutMS={200}
         overlayClassName={{
           base: "overlay-base",
