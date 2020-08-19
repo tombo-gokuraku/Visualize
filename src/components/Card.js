@@ -13,6 +13,7 @@ Modal.setAppElement("#___gatsby")
 
 function Card({ children, image, title }) {
   const [showModal, setShowModal] = useState(false)
+  console.log(image)
   return (
     <div
       css={[
@@ -36,7 +37,7 @@ function Card({ children, image, title }) {
     >
       <div tw="w-full rounded-t-lg">
         <Image
-          fluid={image}
+          fluid={image.childImageSharp.fluid}
           style={{
             borderTopRightRadius: "0.5rem",
             borderTopLeftRadius: "0.5rem",
@@ -123,8 +124,13 @@ function Card({ children, image, title }) {
         </button>
         <Image
           fluid={image}
-          style={{ display: "inline-block", width: "100%", height: "100%" }}
-          imgStyle={{ objectFit: "contain", width: "100%", height: "100%" }}
+          style={{
+            display: "inline-block",
+            aspectRatio: image.aspectRatio,
+            //maxWidth: image.childImageSharp.sizes.presentationWidth,
+          }}
+          sizes={image.childImageSharp.sizes}
+          imgStyle={{ objectFit: "contain", width: "auto", height: "100%" }}
         />
       </Modal>
     </div>
