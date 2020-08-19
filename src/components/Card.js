@@ -111,7 +111,7 @@ function Card({ children, image, title }) {
       >
         <button
           css={[
-            tw`absolute z-10 text-4xl text-white border-2 border-white rounded-full text-opacity-50 border-opacity-50`,
+            tw`fixed z-10 text-4xl text-white border-2 border-white rounded-full text-opacity-50 border-opacity-50 hover:(text-opacity-75 border-opacity-75)`,
             css`
               top: 1rem;
               right: 1rem;
