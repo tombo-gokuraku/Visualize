@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx, Global } from "@emotion/core"
-import { useState, useCallback } from "react"
+import { useState } from "react"
 import PropTypes from "prop-types"
 import tw, { css } from "twin.macro"
 import Modal from "react-modal"
@@ -13,15 +13,6 @@ Modal.setAppElement("#___gatsby")
 
 function Card({ children, image, title }) {
   const [showModal, setShowModal] = useState(false)
-  const [modalContentHeight, setModalContentHeight] = useState(0)
-
-  const measuredRef = useCallback(node => {
-    console.log(node)
-    if (node !== null) {
-      setModalContentHeight(node.base.parentNode.getBoundingClientRect().height)
-      console.log(node.base.parentNode.getBoundingClientRect().height)
-    }
-  }, [])
 
   return (
     <div
@@ -83,19 +74,24 @@ function Card({ children, image, title }) {
             opacity: 0;
           }
           .content-base {
-            position: relative;
-            top: auto;
-            left: auto;
-            right: auto;
-            bottom: auto;
-            margin: 0 auto;
-            border: 0;
-            background-color: transparent;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100%;
-            width: auto;
+            /* position: relative; */
+            /* top: auto; */
+            /* left: auto; */
+            /* right: auto; */
+            /* bottom: auto; */
+            /* margin: 0 auto; */
+            /* border: 0; */
+            /* background-color: transparent; */
+            /* display: flex; */
+            /* justify-content: center; */
+            /* align-items: center; */
+            /* height: 100%; */
+            /* width: auto; */
+            /* position: relative; */
+            /* overflow: hidden; */
+            background-color: lightgreen;
+            /* padding-top: calc(100% * ${image.aspectRatio}); */
+            /* height: 0; */
           }
         `}
       />
@@ -132,14 +128,17 @@ function Card({ children, image, title }) {
           <MdClose />
         </button>
         <Image
-          ref={measuredRef}
           fluid={image}
-          style={{
-            display: "inline-block",
-            // width: calc(content element height * aspectRatio)
-            width: `calc(${modalContentHeight}px * ${image.aspectRatio})`,
-            height: "100%",
-          }}
+          style={
+            {
+              //display: "inline-block",
+              // width: calc(content element height * aspectRatio)
+              // width: `calc(${modalContentHeight}px * ${image.aspectRatio})`,
+              //width: "auto",
+              //height: "auto",
+              //position: "static",
+            }
+          }
           imgStyle={{ objectFit: "contain", width: "auto", height: "100%" }}
         />
       </Modal>
