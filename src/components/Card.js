@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { jsx, Global } from "@emotion/core"
-import { useState } from "react"
+import { useState, useLayoutEffect, useRef } from "react"
+import useResizeObserver from "@react-hook/resize-observer"
 import PropTypes from "prop-types"
 import tw, { css } from "twin.macro"
 import Modal from "react-modal"
@@ -11,8 +12,28 @@ import H2 from "../components/H2"
 
 Modal.setAppElement("#___gatsby")
 
+const useSize = target => {
+  // console.log(target)
+  console.log({ ...target })
+  // console.log(target.current.current.base.parentNode.getBoundingClientRect())
+  const [size, setSize] = useState()
+  useLayoutEffect(() => {
+    // setSize(target.current.base.parentNode.getBoundingClientRect())
+    setSize(target.current.getBoundingClientRect())
+  }, [target])
+
+  useResizeObserver(target, entry => {
+    setSize(entry.contentRect)
+  })
+  return size
+}
+
 function Card({ children, image, title }) {
   const [showModal, setShowModal] = useState(false)
+
+  const target = useRef(null)
+  const size = useSize(target)
+  // console.log(size)
 
   return (
     <div
@@ -74,24 +95,19 @@ function Card({ children, image, title }) {
             opacity: 0;
           }
           .content-base {
-            /* position: relative; */
-            /* top: auto; */
-            /* left: auto; */
-            /* right: auto; */
-            /* bottom: auto; */
-            /* margin: 0 auto; */
-            /* border: 0; */
-            /* background-color: transparent; */
-            /* display: flex; */
-            /* justify-content: center; */
-            /* align-items: center; */
-            /* height: 100%; */
-            /* width: auto; */
-            /* position: relative; */
-            /* overflow: hidden; */
-            background-color: lightgreen;
-            /* padding-top: calc(100% * ${image.aspectRatio}); */
-            /* height: 0; */
+            position: relative;
+            top: auto;
+            left: auto;
+            right: auto;
+            bottom: auto;
+            margin: 0 auto;
+            border: 0;
+            background-color: transparent;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            width: auto;
           }
         `}
       />
@@ -114,6 +130,7 @@ function Card({ children, image, title }) {
           afterOpen: "content-after",
           beforeClose: "content-before",
         }}
+        contentRef={target}
       >
         <button
           css={[
@@ -129,16 +146,13 @@ function Card({ children, image, title }) {
         </button>
         <Image
           fluid={image}
-          style={
-            {
-              //display: "inline-block",
-              // width: calc(content element height * aspectRatio)
-              // width: `calc(${modalContentHeight}px * ${image.aspectRatio})`,
-              //width: "auto",
-              //height: "auto",
-              //position: "static",
-            }
-          }
+          style={{
+            display: "inline-block",
+            // width: calc(content element height * aspectRatio)
+            // width: `calc(${modalContentHeight}px * ${image.aspectRatio})`,
+            width: "100%",
+            height: "100%",
+          }}
           imgStyle={{ objectFit: "contain", width: "auto", height: "100%" }}
         />
       </Modal>
