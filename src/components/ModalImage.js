@@ -18,50 +18,52 @@ function ModalImage({ showModal, setShowModal, image }) {
       {({ css, cx }) => (
         <Modal
           portalClassName={css`
-          & .overlay-base {
-            max-width: 100%;
-            max-height: 100vh;
-            height: 100vh;
-            padding: 1rem;
-            position: fixed;
-            top: 0;
-            bottom: 0;
-            right: 0;
-            left: 0;
-            background-color: rgba(0, 0, 0, 0);
-            opacity: 0;
-            transition-property: background-color, opacity;
-            transition-duration: 200ms;
-            transition-timing-function: ease-in-out;
-          }
-          & .overlay-after {
-            background-color: rgba(0, 0, 0, 0.8);
-            opacity: 1;
-          }
-          & .overlay-before {
-            background-color: rgba(0, 0, 0, 0);
-            opacity: 0;
-          }
-          & .content-base {
-            position: relative;
-            top: auto;
-            left: auto;
-            right: auto;
-            bottom: auto;
-            margin: 0 auto;
-            border: 0;
-            background-color: transparent;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100%;
-            width: auto;
-          }
+            & .overlay-base {
+              max-width: 100%;
+              max-height: 100vh;
+              height: 100vh;
+              padding: 1rem;
+              position: fixed;
+              top: 0;
+              bottom: 0;
+              right: 0;
+              left: 0;
+              background-color: rgba(0, 0, 0, 0);
+              opacity: 0;
+              transition-property: background-color, opacity;
+              transition-duration: 200ms;
+              transition-timing-function: ease-in-out;
+              outline: 0;
+            }
+            & .overlay-after {
+              background-color: rgba(0, 0, 0, 0.8);
+              opacity: 1;
+            }
+            & .overlay-before {
+              background-color: rgba(0, 0, 0, 0);
+              opacity: 0;
+            }
+            & .content-base {
+              position: relative;
+              top: auto;
+              left: auto;
+              right: auto;
+              bottom: auto;
+              margin: 0 auto;
+              border: 0;
+              outline: 0;
+              background-color: transparent;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              height: 100%;
+              width: auto;
+            }
 
-          /* this occurs error. Because the global style is not dynamically changed by state? */
-          /* .content-after { */
-          /*   width: calc(${contentHeight}px * ${image.aspectRatio}); */
-          /* } */
+            /*this occurs error. Because the global style is not dynamically changed by state?*/
+            .content-after {
+              width: calc(${contentHeight}px * ${image.aspectRatio});
+            }
           `}
           isOpen={showModal}
           onRequestClose={e => {
@@ -89,9 +91,9 @@ function ModalImage({ showModal, setShowModal, image }) {
         >
           <button
             css={css`
-              top: 1rem;
-              right: 1rem;
-              ${tw`absolute z-10 text-4xl text-white border-2 border-white rounded-full text-opacity-50 border-opacity-50 hover:(text-opacity-75 border-opacity-75)`}
+              top: 0.5rem;
+              right: 0.5rem;
+              ${tw`absolute z-10 focus:outline-none text-4xl text-white border-2 border-white rounded-full text-opacity-75 border-opacity-75 hover:(text-opacity-100 border-opacity-100)`}
             `}
             onClick={() => setShowModal(false)}
           >
