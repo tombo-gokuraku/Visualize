@@ -14,7 +14,7 @@ Modal.setAppElement("#___gatsby")
 
 const useSize = target => {
   // console.log(target)
-  console.log({ ...target })
+  // console.log({ ...target })
   // console.log(target.current.current.base.parentNode.getBoundingClientRect())
   const [size, setSize] = useState()
   useLayoutEffect(() => {
@@ -30,9 +30,10 @@ const useSize = target => {
 
 function Card({ children, image, title }) {
   const [showModal, setShowModal] = useState(false)
+  const [contentHeight, setContentHeight] = useState(0)
 
-  const target = useRef(null)
-  const size = useSize(target)
+  // const target = useRef(null)
+  // const size = useSize(target)
   // console.log(size)
 
   return (
@@ -109,6 +110,11 @@ function Card({ children, image, title }) {
             height: 100%;
             width: auto;
           }
+
+          /* this occurs error. Because the global style is not dynamically changed by state? */
+          /* .content-after { */
+          /*   width: calc(${contentHeight}px * ${image.aspectRatio}); */
+          /* } */
         `}
       />
 
@@ -130,7 +136,12 @@ function Card({ children, image, title }) {
           afterOpen: "content-after",
           beforeClose: "content-before",
         }}
-        contentRef={target}
+        contentRef={node => {
+          this.contentRef = node
+        }}
+        onAfterOpen={() => {
+          setContentHeight(this.contentRef.getBoundingClientRect().height)
+        }}
       >
         <button
           css={[
@@ -147,10 +158,8 @@ function Card({ children, image, title }) {
         <Image
           fluid={image}
           style={{
-            display: "inline-block",
-            // width: calc(content element height * aspectRatio)
-            // width: `calc(${modalContentHeight}px * ${image.aspectRatio})`,
-            width: "100%",
+            // Calculate the width to maintain the aspect ratio of the modal content height
+            width: `calc(${contentHeight}px * ${image.aspectRatio})`,
             height: "100%",
           }}
           imgStyle={{ objectFit: "contain", width: "auto", height: "100%" }}
