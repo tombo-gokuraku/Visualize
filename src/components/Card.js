@@ -1,7 +1,6 @@
 /** @jsx jsx */
 import { jsx, Global } from "@emotion/core"
-import { useState, useLayoutEffect, useRef } from "react"
-import useResizeObserver from "@react-hook/resize-observer"
+import { useState } from "react"
 import PropTypes from "prop-types"
 import tw, { css } from "twin.macro"
 import Modal from "react-modal"
@@ -12,29 +11,9 @@ import H2 from "../components/H2"
 
 Modal.setAppElement("#___gatsby")
 
-const useSize = target => {
-  // console.log(target)
-  // console.log({ ...target })
-  // console.log(target.current.current.base.parentNode.getBoundingClientRect())
-  const [size, setSize] = useState()
-  useLayoutEffect(() => {
-    // setSize(target.current.base.parentNode.getBoundingClientRect())
-    setSize(target.current.getBoundingClientRect())
-  }, [target])
-
-  useResizeObserver(target, entry => {
-    setSize(entry.contentRect)
-  })
-  return size
-}
-
 function Card({ children, image, title }) {
   const [showModal, setShowModal] = useState(false)
   const [contentHeight, setContentHeight] = useState(0)
-
-  // const target = useRef(null)
-  // const size = useSize(target)
-  // console.log(size)
 
   return (
     <div
