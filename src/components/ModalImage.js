@@ -1,8 +1,8 @@
 /** @jsx jsx */
-import { jsx, Global } from "@emotion/core"
+import { jsx, ClassNames } from "@emotion/core"
 import { useState } from "react"
 import PropTypes from "prop-types"
-import tw, { css } from "twin.macro"
+import tw from "twin.macro"
 import Modal from "react-modal"
 
 import { MdClose } from "react-icons/md"
@@ -12,12 +12,13 @@ Modal.setAppElement("#___gatsby")
 
 function ModalImage({ showModal, setShowModal, image }) {
   const [contentHeight, setContentHeight] = useState(0)
+
   return (
-    <div>
-      {/* Modalのためのスタイルをグローバルに追加する */}
-      <Global
-        styles={css`
-          .overlay-base {
+    <ClassNames>
+      {({ css, cx }) => (
+        <Modal
+          portalClassName={css`
+          & .overlay-base {
             max-width: 100%;
             max-height: 100vh;
             height: 100vh;
@@ -33,15 +34,15 @@ function ModalImage({ showModal, setShowModal, image }) {
             transition-duration: 200ms;
             transition-timing-function: ease-in-out;
           }
-          .overlay-after {
+          & .overlay-after {
             background-color: rgba(0, 0, 0, 0.8);
             opacity: 1;
           }
-          .overlay-before {
+          & .overlay-before {
             background-color: rgba(0, 0, 0, 0);
             opacity: 0;
           }
-          .content-base {
+          & .content-base {
             position: relative;
             top: auto;
             left: auto;
@@ -61,62 +62,58 @@ function ModalImage({ showModal, setShowModal, image }) {
           /* .content-after { */
           /*   width: calc(${contentHeight}px * ${image.aspectRatio}); */
           /* } */
-        `}
-      />
-
-      <Modal
-        isOpen={showModal}
-        onRequestClose={e => {
-          e.stopPropagation()
-          setShowModal(false)
-        }}
-        shouldCloseOnOverlayClick={true}
-        closeTimeoutMS={200}
-        overlayClassName={{
-          base: "overlay-base",
-          afterOpen: "overlay-after",
-          beforeClose: "overlay-before",
-        }}
-        className={{
-          base: "content-base",
-          afterOpen: "content-after",
-          beforeClose: "content-before",
-        }}
-        contentRef={node => {
-          this.contentRef = node
-        }}
-        onAfterOpen={() => {
-          setContentHeight(this.contentRef.getBoundingClientRect().height)
-        }}
-      >
-        <button
-          css={[
-            tw`fixed z-10 text-4xl text-white border-2 border-white rounded-full text-opacity-50 border-opacity-50 hover:(text-opacity-75 border-opacity-75)`,
-            css`
+          `}
+          isOpen={showModal}
+          onRequestClose={e => {
+            e.stopPropagation()
+            setShowModal(false)
+          }}
+          shouldCloseOnOverlayClick={true}
+          closeTimeoutMS={200}
+          overlayClassName={{
+            base: "overlay-base",
+            afterOpen: "overlay-after",
+            beforeClose: "overlay-before",
+          }}
+          className={{
+            base: "content-base",
+            afterOpen: "content-after",
+            beforeClose: "content-before",
+          }}
+          contentRef={node => {
+            this.contentRef = node
+          }}
+          onAfterOpen={() => {
+            setContentHeight(this.contentRef.getBoundingClientRect().height)
+          }}
+        >
+          <button
+            css={css`
               top: 1rem;
               right: 1rem;
-            `,
-          ]}
-          onClick={() => setShowModal(false)}
-        >
-          <MdClose />
-        </button>
-        <Image
-          fluid={image}
-          style={{
-            // Calculate the width to maintain the aspect ratio of the modal content height
-            width: `calc(${contentHeight}px * ${image.aspectRatio})`,
-            height: "100%",
-          }}
-          imgStyle={{ objectFit: "contain", width: "auto", height: "100%" }}
-        />
-      </Modal>
-    </div>
+              ${tw`absolute z-10 text-4xl text-white border-2 border-white rounded-full text-opacity-50 border-opacity-50 hover:(text-opacity-75 border-opacity-75)`}
+            `}
+            onClick={() => setShowModal(false)}
+          >
+            <MdClose />
+          </button>
+          <Image
+            fluid={image}
+            style={{
+              // Calculate the width to maintain the aspect ratio of the modal content height
+              width: `calc(${contentHeight}px * ${image.aspectRatio})`,
+              height: "100%",
+            }}
+            imgStyle={{ objectFit: "contain", width: "auto", height: "100%" }}
+          />
+        </Modal>
+      )}
+    </ClassNames>
   )
 }
 
 ModalImage.propTypes = {
-  children: PropTypes.node,
+  children: PropTypes.element,
   image: PropTypes.object,
   showModal: PropTypes.bool,
   setShowModal: PropTypes.func,
