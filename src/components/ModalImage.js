@@ -100,7 +100,7 @@ function ModalImage({ showModal, setShowModal, image }) {
             <MdClose />
           </button>
           <Image
-            fluid={image}
+            fluid={{ ...image, sizes: "" }}
             style={{
               // Calculate the width to maintain the aspect ratio of the modal content height
               width: `calc(${contentHeight}px * ${image.aspectRatio})`,
