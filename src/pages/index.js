@@ -39,7 +39,7 @@ const IndexPage = () => {
       ) {
         images: nodes {
           childImageSharp {
-            fluid(maxWidth: 600) {
+            fluid(maxWidth: 300) {
               ...GatsbyImageSharpFluid_withWebp
             }
             id
