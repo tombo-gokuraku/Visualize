@@ -2,11 +2,9 @@
 import { jsx, ClassNames } from "@emotion/core"
 import { useState } from "react"
 import PropTypes from "prop-types"
-import tw from "twin.macro"
-import Modal from "react-modal"
-
-import { MdClose } from "react-icons/md"
 import Image from "gatsby-image"
+import Modal from "react-modal"
+import CloseButton from "./CloseButton"
 
 Modal.setAppElement("#___gatsby")
 
@@ -92,16 +90,7 @@ function ModalImage({ showModal, setShowModal, image }) {
             setContentRect(this.contentRef.getBoundingClientRect())
           }}
         >
-          <button
-            css={css`
-              top: 0.5rem;
-              right: 0.5rem;
-              ${tw`absolute z-10 focus:outline-none text-4xl text-white border-2 border-white rounded-full text-opacity-75 border-opacity-75 hover:(text-opacity-100 border-opacity-100)`}
-            `}
-            onClick={() => setShowModal(false)}
-          >
-            <MdClose />
-          </button>
+          <CloseButton onClick={() => setShowModal(false)} />
           <Image
             fluid={{ ...image, sizes: "" }}
             style={{
