@@ -11,17 +11,15 @@ import Image from "gatsby-image"
 Modal.setAppElement("#___gatsby")
 
 function ModalImage({ showModal, setShowModal, image }) {
-  const [contentHeight, setContentHeight] = useState(0)
-
+  const [contentRect, setContentRect] = useState({})
   return (
     <ClassNames>
       {({ css, cx }) => (
         <Modal
           portalClassName={css`
             & .overlay-base {
-              max-width: 100%;
-              max-height: 100vh;
-              height: 100vh;
+              width: 100%;
+              height: 100%;
               padding: 1rem;
               position: fixed;
               top: 0;
@@ -34,6 +32,9 @@ function ModalImage({ showModal, setShowModal, image }) {
               transition-duration: 200ms;
               transition-timing-function: ease-in-out;
               outline: 0;
+              display: flex;
+              justify-content: center;
+              align-items: center;
             }
             & .overlay-after {
               background-color: rgba(0, 0, 0, 0.8);
@@ -57,12 +58,14 @@ function ModalImage({ showModal, setShowModal, image }) {
               justify-content: center;
               align-items: center;
               height: 100%;
-              width: auto;
+              width: 100%;
             }
 
-            /*this occurs error. Because the global style is not dynamically changed by state?*/
             .content-after {
-              width: calc(${contentHeight}px * ${image.aspectRatio});
+              width: calc(${contentRect.height}px * ${image.aspectRatio});
+              height: calc(${contentRect.width}px / ${image.aspectRatio});
+              max-width: 100%;
+              max-height: 100%;
             }
           `}
           isOpen={showModal}
@@ -86,7 +89,7 @@ function ModalImage({ showModal, setShowModal, image }) {
             this.contentRef = node
           }}
           onAfterOpen={() => {
-            setContentHeight(this.contentRef.getBoundingClientRect().height)
+            setContentRect(this.contentRef.getBoundingClientRect())
           }}
         >
           <button
@@ -102,8 +105,7 @@ function ModalImage({ showModal, setShowModal, image }) {
           <Image
             fluid={{ ...image, sizes: "" }}
             style={{
-              // Calculate the width to maintain the aspect ratio of the modal content height
-              width: `calc(${contentHeight}px * ${image.aspectRatio})`,
+              width: "100%",
               height: "100%",
             }}
             imgStyle={{ objectFit: "contain", width: "auto", height: "100%" }}
