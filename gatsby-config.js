@@ -21,7 +21,7 @@ module.exports = {
       options: {
         name: `Visualize test`,
         short_name: `Visualize`,
-        start_url: `${this.pathPrefix}/`,
+        start_url: `/`,
         background_color: `#663399`,
         theme_color: `#663399`,
         display: `minimal-ui`,
